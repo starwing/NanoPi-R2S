@@ -62,49 +62,46 @@ jobs:
         run: |
           cd code/friendlywrt/package
 
-          git clone https://github.com/rufengsuixing/luci-app-adguardhome
+          # 广告助手，暂时关闭
+          # git clone https://github.com/rufengsuixing/luci-app-adguardhome
 
-          git clone https://github.com/jerrykuku/lua-maxminddb.git
-          git clone https://github.com/jerrykuku/luci-app-vssr.git
+          # vssr fq用
+          # git clone https://github.com/jerrykuku/lua-maxminddb.git
+          # git clone https://github.com/jerrykuku/luci-app-vssr.git
 
-          rm -rf lean/luci-theme-argon
-          git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
+          # 主题
+          # rm -rf lean/luci-theme-argon
+          # git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git
 
+          # OpenClash
           svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
-          
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/tcping
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/ssocks
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-plus
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-go
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/naiveproxy
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/brook
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/chinadns-ng
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/xray-core
-          svn co https://github.com/xiaorouji/openwrt-passwall/trunk/xray-plugin
-          
-          svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher
-          
-          svn co https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
-          svn co https://github.com/pymumu/luci-app-smartdns/branches/lede luci-app-smartdns
-          
-          svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman
-          
-          git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git
-          git clone https://github.com/NateLol/luci-app-oled
-        
-      - name: Install Clash Binaries
-        run: |
-          cd code/friendlywrt/package/base-files/files
-          mkdir -p etc/openclash/core
-          # for updates, go to: https://github.com/Dreamacro/clash/releases
-          wget -qO- https://github.com/Dreamacro/clash/releases/download/v1.4.2/clash-linux-armv8-v1.4.2.gz | gunzip -c > etc/openclash/core/clash
-          # for updates, go to: https://github.com/vernesong/OpenClash/releases/tag/TUN-Premium
-          wget -qO- https://github.com/vernesong/OpenClash/releases/download/TUN-Premium/clash-linux-armv8-2021.03.10.gz | gunzip -c > etc/openclash/core/clash_tun
-          # for updates, go to: https://github.com/vernesong/OpenClash/releases/tag/TUN
-          wget -qO- https://github.com/vernesong/OpenClash/releases/download/TUN/clash-linux-armv8.tar.gz | tar xOvz > etc/openclash/core/clash_game
-          chmod +x etc/openclash/core/clash*
 
+          # 一堆看起来用不上的包
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/tcping
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/ssocks
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-plus
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/trojan-go
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/naiveproxy
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/brook
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/chinadns-ng
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/xray-core
+          # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/xray-plugin
+
+          # 不常刷机，用不上
+          # svn co https://github.com/songchenwen/nanopi-r2s/trunk/luci-app-r2sflasher
+
+          # smartdns 用不上
+          # svn co https://github.com/pymumu/smartdns/trunk/package/openwrt smartdns
+          # svn co https://github.com/pymumu/luci-app-smartdns/branches/lede luci-app-smartdns
+
+          # 不跑docker，用不上
+          # svn co https://github.com/lisaac/luci-app-dockerman/trunk/applications/luci-app-dockerman
+          
+          # 下面这两个用不上
+          # git clone https://github.com/jerrykuku/luci-app-jd-dailybonus.git
+          # git clone https://github.com/NateLol/luci-app-oled
+        
       - name: Update Target.mk
         run: |
           cd code/friendlywrt/include
@@ -120,11 +117,13 @@ jobs:
         run: |
           cd code/friendlywrt
 
+          # openclash依赖项
           rm -rf feeds/packages/libs/libcap
           svn co https://github.com/openwrt/packages/trunk/libs/libcap feeds/packages/libs/libcap
-          
-          rm -rf package/feeds/packages/netdata
-          svn co https://github.com/openwrt/packages/trunk/admin/netdata package/feeds/packages/netdata
+
+          # NetData
+          # rm -rf package/feeds/packages/netdata
+          # svn co https://github.com/openwrt/packages/trunk/admin/netdata package/feeds/packages/netdata
 
           rm -rf feeds/packages/libs/libnatpmp
           svn co https://github.com/coolsnowwolf/packages/trunk/libs/libnatpmp feeds/packages/libs/libnatpmp
@@ -135,9 +134,9 @@ jobs:
           sed -i '/STAMP_BUILT/d' feeds/packages/utils/runc/Makefile
           sed -i '/STAMP_BUILT/d' feeds/packages/utils/containerd/Makefile
           
-          sed -i '/upx/d' package/lean/frp/Makefile
-          sed -i '/upx/d' package/lean/UnblockNeteaseMusicGo/Makefile
-          sed -i '/upx/d' package/trojan-go/Makefile
+          # sed -i '/upx/d' package/lean/frp/Makefile
+          # sed -i '/upx/d' package/lean/UnblockNeteaseMusicGo/Makefile
+          # sed -i '/upx/d' package/trojan-go/Makefile
           
           wget -O package/kernel/kmod-sched-cake/Makefile https://raw.githubusercontent.com/coolsnowwolf/lede/master/package/kernel/kmod-sched-cake-oot/Makefile
           wget -O feeds/packages/libs/libxml2/Makefile https://raw.githubusercontent.com/coolsnowwolf/packages/master/libs/libxml2/Makefile
@@ -147,13 +146,14 @@ jobs:
           sed -i 's/pcdata(boardinfo.system or "?")/"ARMv8"/' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
           sed -i 's/services/vpn/g' package/feeds/luci/luci-app-openvpn/luasrc/controller/openvpn.lua
           sed -i 's/resolv.conf.d\/resolv.conf.auto/resolv.conf.auto/g' package/lean/luci-app-flowoffload/root/etc/init.d/flowoffload
-          
-          sed -i '/done/imkfs.ext4 /dev/mmcblk0p2 && mkdir /mnt/mmcblk0p2 && mount /dev/mmcblk0p2 /mnt/mmcblk0p2 && mkdir /mnt/mmcblk0p2/docker\n' package/base-files/files/root/setup.sh
-          sed -i "/done/iblock detect | sed \"s/enabled\\\t'0'/enabled\\\t'1'/\" > /etc/config/fstab\n" package/base-files/files/root/setup.sh
-          sed -i '/done/i[ -f /etc/init.d/dockerman ] && /etc/init.d/dockerman restart\n' package/base-files/files/root/setup.sh
 
-          sed -i 's/\/opt\/docker/\/mnt\/mmcblk0p2\/docker/g' package/luci-app-dockerman/root/etc/config/dockerman
-          sed -i 's/\/root/\/mnt\/mmcblk0p2/g' package/luci-app-r2sflasher/root/usr/bin/rom_flash
+          # 这里是给docker准备的
+          # sed -i '/done/imkfs.ext4 /dev/mmcblk0p2 && mkdir /mnt/mmcblk0p2 && mount /dev/mmcblk0p2 /mnt/mmcblk0p2 && mkdir /mnt/mmcblk0p2/docker\n' package/base-files/files/root/setup.sh
+          # sed -i "/done/iblock detect | sed \"s/enabled\\\t'0'/enabled\\\t'1'/\" > /etc/config/fstab\n" package/base-files/files/root/setup.sh
+          # sed -i '/done/i[ -f /etc/init.d/dockerman ] && /etc/init.d/dockerman restart\n' package/base-files/files/root/setup.sh
+
+          # sed -i 's/\/opt\/docker/\/mnt\/mmcblk0p2\/docker/g' package/luci-app-dockerman/root/etc/config/dockerman
+          # sed -i 's/\/root/\/mnt\/mmcblk0p2/g' package/luci-app-r2sflasher/root/usr/bin/rom_flash
 
       - name: Patch Kernel
         run: |
@@ -168,7 +168,8 @@ jobs:
       - name: Set Default Values
         run: |
           cd code/friendlywrt
-          sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase=/luci-static/argon' package/lean/default-settings/files/zzz-default-settings
+          # 这里换了主题
+          # sed -i '/uci commit luci/i\uci set luci.main.mediaurlbase=/luci-static/argon' package/lean/default-settings/files/zzz-default-settings
            
       - name: Install UPX
         run: |
