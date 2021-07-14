@@ -1,0 +1,67 @@
+From 7410390ca75eb8d12bbaa6c88b4787311fdf8e79 Mon Sep 17 00:00:00 2001
+From: Qize Xu <xxqqzztx@gmail.com>
+Date: Wed, 14 Jul 2021 23:15:47 +0800
+Subject: [PATCH 2/2] disable EEE led mode
+
+---
+ drivers/net/phy/realtek.c | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+
+diff --git a/drivers/net/phy/realtek.c b/drivers/net/phy/realtek.c
+index 575580d3ffe0..9d8f801875f2 100644
+--- a/drivers/net/phy/realtek.c
++++ b/drivers/net/phy/realtek.c
+@@ -58,6 +58,10 @@
+ 
+ #define RTL_GENERIC_PHYID			0x001cc800
+ 
++/* RTL8211E page 5 */
++#define RTL8211E_EEE_LED_MODE1			0x05
++#define RTL8211E_EEE_LED_MODE2			0x06
++
+ MODULE_DESCRIPTION("Realtek PHY driver");
+ MODULE_AUTHOR("Johnson Leung");
+ MODULE_LICENSE("GPL");
+@@ -246,6 +250,30 @@ static int rtl8211f_config_init(struct phy_device *phydev)
+ 	return 0;
+ }
+ 
++static void rtl8211e_disable_eee_led_mode(struct phy_device *phydev)
++{
++	int oldpage;
++	int err = 0;
++
++	oldpage = phy_select_page(phydev, 5);
++	if (oldpage < 0)
++		goto out;
++
++	/* write magic values to disable EEE LED mode */
++	err = __phy_write(phydev, RTL8211E_EEE_LED_MODE1, 0x8b82);
++	if (err)
++		goto out;
++
++	err = __phy_write(phydev, RTL8211E_EEE_LED_MODE2, 0x052b);
++
++out:
++	if (err)
++		phydev_warn(phydev, "failed to disable EEE LED mode: %d\n",
++			    err);
++
++	phy_restore_page(phydev, oldpage, err);
++}
++
+ static int rtl8211e_config_init(struct phy_device *phydev)
+ {
+ 	int ret = 0, oldpage;
+@@ -269,6 +297,8 @@ static int rtl8211e_config_init(struct phy_device *phydev)
+ 		return 0;
+ 	}
+ 
++	rtl8211e_disable_eee_led_mode(phydev);
++
+ 	/* According to a sample driver there is a 0x1c config register on the
+ 	 * 0xa4 extension page (0x7) layout. It can be used to disable/enable
+ 	 * the RX/TX delays otherwise controlled by RXDLY/TXDLY pins.
+-- 
+2.17.1
+

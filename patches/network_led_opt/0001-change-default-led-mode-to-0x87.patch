@@ -1,0 +1,25 @@
+From 8546b171ccb3b4218d2c320320104a8c188000d4 Mon Sep 17 00:00:00 2001
+From: Qize Xu <xxqqzztx@gmail.com>
+Date: Wed, 14 Jul 2021 03:59:04 -0700
+Subject: [PATCH 1/2] change default led mode to 0x87
+
+---
+ drivers/net/usb/r8152.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/usb/r8152.c b/drivers/net/usb/r8152.c
+index e3f853265760..cd7b1b9abcd7 100644
+--- a/drivers/net/usb/r8152.c
++++ b/drivers/net/usb/r8152.c
+@@ -40,7 +40,7 @@
+ #define MODULENAME "r8152"
+ 
+ /* LED0: Activity, LED1: Link */
+-static int ledsel = 0x78;
++static int ledsel = 0x87;
+ module_param(ledsel, int, 0);
+ MODULE_PARM_DESC(ledsel, "Override default LED configuration");
+ 
+-- 
+2.17.1
+
