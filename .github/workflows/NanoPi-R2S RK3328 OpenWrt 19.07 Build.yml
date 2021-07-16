@@ -118,21 +118,21 @@ jobs:
           cd code/friendlywrt
 
           # openclash依赖项
-          rm -rf feeds/packages/libs/libcap
-          svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packages/libs/libcap
+          # rm -rf feeds/packages/libs/libcap
+          # svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packages/libs/libcap
 
           # NetData
           # rm -rf package/feeds/packages/netdata
           # svn co https://github.com/openwrt/packages/trunk/admin/netdata package/feeds/packages/netdata
 
-          rm -rf feeds/packages/libs/libnatpmp
-          svn co https://github.com/coolsnowwolf/packages/trunk/libs/libnatpmp feeds/packages/libs/libnatpmp
+          # rm -rf feeds/packages/libs/libnatpmp
+          # svn co https://github.com/coolsnowwolf/packages/trunk/libs/libnatpmp feeds/packages/libs/libnatpmp
           
-          rm -rf feeds/packages/lang/luasec
-          svn co https://github.com/coolsnowwolf/packages/trunk/lang/luasec feeds/packages/lang/luasec
+          # rm -rf feeds/packages/lang/luasec
+          # svn co https://github.com/coolsnowwolf/packages/trunk/lang/luasec feeds/packages/lang/luasec
 
-          sed -i '/STAMP_BUILT/d' feeds/packages/utils/runc/Makefile
-          sed -i '/STAMP_BUILT/d' feeds/packages/utils/containerd/Makefile
+          # sed -i '/STAMP_BUILT/d' feeds/packages/utils/runc/Makefile
+          # sed -i '/STAMP_BUILT/d' feeds/packages/utils/containerd/Makefile
           
           # sed -i '/upx/d' package/lean/frp/Makefile
           # sed -i '/upx/d' package/lean/UnblockNeteaseMusicGo/Makefile
@@ -140,7 +140,7 @@ jobs:
 
           # 404了
           # wget -O package/kernel/kmod-sched-cake/Makefile https://raw.githubusercontent.com/coolsnowwolf/lede/master/package/kernel/kmod-sched-cake-oot/Makefile
-          wget -O feeds/packages/libs/libxml2/Makefile https://raw.githubusercontent.com/coolsnowwolf/packages/master/libs/libxml2/Makefile
+          # wget -O feeds/packages/libs/libxml2/Makefile https://raw.githubusercontent.com/coolsnowwolf/packages/master/libs/libxml2/Makefile
 
           # sed -i "/redirect_https/d" package/network/services/uhttpd/files/uhttpd.config
           sed -i '/Load Average/i\\t\t<tr><td width="33%"><%:CPU Temperature%></td><td><%=luci.sys.exec("cut -c1-2 /sys/class/thermal/thermal_zone0/temp")%><span>&#8451;</span></td></tr>' feeds/luci/modules/luci-mod-admin-full/luasrc/view/admin_status/index.htm
@@ -160,6 +160,7 @@ jobs:
         run: |
           cd code/kernel/
           #git apply ../../patches/001-add-full_cone_nat.patch
+          git apply ../../patches/network_led_opt/*.patch
 
       - name: Custom Configure Files
         run: |
