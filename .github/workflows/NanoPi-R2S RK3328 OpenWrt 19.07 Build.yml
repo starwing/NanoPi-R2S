@@ -76,6 +76,9 @@ jobs:
           # OpenClash
           svn co https://github.com/vernesong/OpenClash/trunk/luci-app-openclash
 
+          # ddns-scripts_dnspod
+          svn co https://github.com/coolsnowwolf/lede/trunk/package/lean/ddns-scripts_dnspod
+
           # 一堆看起来用不上的包
           # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/luci-app-passwall
           # svn co https://github.com/xiaorouji/openwrt-passwall/trunk/tcping

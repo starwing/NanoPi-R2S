@@ -1,3 +1,6 @@
+## 20210718
+* 增加 ddns-scripts_dnspod
+
 ## 20210716
 * 使用本地成功编译的config
 * 在 ubuntu-18.04 上编译
