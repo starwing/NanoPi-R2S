@@ -1,3 +1,6 @@
+## 20210720
+* 增加常用的软件包: htop, aria2, gzip, unzip
+
 ## 20210718
 * 增加 ddns-scripts_dnspod
 
