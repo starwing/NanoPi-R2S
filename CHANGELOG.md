@@ -2,6 +2,8 @@
 * 增加自用软件包：vim-fuller, tmux, zsh, zerotier
 * 删除软件包：hd-idle
 * 新增的软件包使用openwrt仓库的最新版本
+* 主题换成 argon
+* 新增了一系列在断网的时候有用的命令行工具
 
 ## 20210720
 * 增加常用的软件包: htop, aria2, gzip, unzip
