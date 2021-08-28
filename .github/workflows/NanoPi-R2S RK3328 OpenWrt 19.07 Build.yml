@@ -124,6 +124,22 @@ jobs:
           rm -rf feeds/packages/libs/libcap
           svn co https://github.com/openwrt/openwrt/trunk/package/libs/libcap feeds/packages/libs/libcap
 
+          # zsh 5.8
+          rm -rf feeds/packages/utils/zsh
+          svn co https://github.com/openwrt/packages/trunk/utils/zsh feeds/packages/utils/zsh
+
+          # vim 8.2
+          rm -rf feeds/packages/utils/vim
+          svn co https://github.com/openwrt/packages/trunk/utils/vim feeds/packages/utils/vim
+
+          # tmux 3.2a
+          rm -rf feeds/packages/utils/tmux
+          svn co https://github.com/openwrt/packages/trunk/utils/tmux feeds/packages/utils/tmux
+
+          # zerotier 1.6.5
+          rm -rf feeds/packages/net/zerotier
+          svn co https://github.com/openwrt/packages/trunk/net/zerotier feeds/packages/net/zerotier
+
           # NetData
           # rm -rf package/feeds/packages/netdata
           # svn co https://github.com/openwrt/packages/trunk/admin/netdata package/feeds/packages/netdata
@@ -158,9 +174,6 @@ jobs:
 
           # sed -i 's/\/opt\/docker/\/mnt\/mmcblk0p2\/docker/g' package/luci-app-dockerman/root/etc/config/dockerman
           # sed -i 's/\/root/\/mnt\/mmcblk0p2/g' package/luci-app-r2sflasher/root/usr/bin/rom_flash
-
-          # zerotier 编过需要这个
-          cp ../../patches/011-fix-zerotier-aes.patch feeds/packages/net/zerotier/patches/
 
       - name: Patch Kernel
         run: |

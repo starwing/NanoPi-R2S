@@ -1,6 +1,7 @@
 ## 20210827
 * 增加自用软件包：vim-fuller, tmux, zsh, zerotier
 * 删除软件包：hd-idle
+* 新增的软件包使用openwrt仓库的最新版本
 
 ## 20210720
 * 增加常用的软件包: htop, aria2, gzip, unzip
