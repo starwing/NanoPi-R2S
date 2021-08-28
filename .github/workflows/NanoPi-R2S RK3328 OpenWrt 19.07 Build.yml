@@ -159,6 +159,9 @@ jobs:
           # sed -i 's/\/opt\/docker/\/mnt\/mmcblk0p2\/docker/g' package/luci-app-dockerman/root/etc/config/dockerman
           # sed -i 's/\/root/\/mnt\/mmcblk0p2/g' package/luci-app-r2sflasher/root/usr/bin/rom_flash
 
+          # zerotier 编过需要这个
+          cp ../../patches/011-fix-zerotier-aes.patch feeds/packages/net/zerotier/patches/
+
       - name: Patch Kernel
         run: |
           cd code/kernel/

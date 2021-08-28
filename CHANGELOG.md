@@ -1,5 +1,5 @@
 ## 20210827
-* 增加自用软件包：vim-fuller, tmux, zsh
+* 增加自用软件包：vim-fuller, tmux, zsh, zerotier
 * 删除软件包：hd-idle
 
 ## 20210720
